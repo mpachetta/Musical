@@ -1,12 +1,14 @@
 $(function () {
 
+   
 
     let nombre_usuario ="";
     let actual_instrumentos_name = []
-    let puntaje = 0;
+    
+  puntaje_acumulado=localStorage.getItem('mis_puntos')
     let cont_trofeos = 0;
     let sound = document.createElement("AUDIO");
-let trofeos_ganados=[]
+    let trofeos_ganados=[]
 
 //Pantalla inicial
     pantalla_ini = () => {
@@ -17,7 +19,7 @@ let trofeos_ganados=[]
             $("#entrar").attr("disabled", false)
         })
         
-            $("#usuName").val(localStorage.getItem('mi_nombre'))
+            $("#usuName").val(localStorage.getItem('mi_nombre')).after(puntaje_acumulado, ' puntos')
         
         $("#pantallas #entrar").on("click", () => {
             nombre=$("#usuName").val();
@@ -67,7 +69,7 @@ let trofeos_ganados=[]
         $("#pantallas").empty().append(cont_pantalla_premios)
         $(".cont_pantallas").addClass("w3-animate-opacity")
         $("#usuName_alt").val(x);
-        $("#puntaje").append(puntaje, " puntos")
+        $("#puntaje_acumulado").append(puntaje_acumulado, " puntos")
         $("#premios").append(trofeos_ganados)
 
         $("#salir_premios").click(() => {
@@ -84,7 +86,12 @@ let trofeos_ganados=[]
 
         $("#b_salirResultado").click(() => {
             if (msg == resultado_msg_OK) {
-                puntaje++;
+                
+                puntos=parseInt(localStorage.getItem('mis_puntos'))+1;
+                console.log(puntos)
+                
+                localStorage.setItem('mis_puntos',puntos);
+                
                 if (cont_trofeos < 9) {
                     cont_trofeos++;
                 } else {
@@ -110,7 +117,7 @@ let trofeos_ganados=[]
 
         $("#b_salirResultado2").click(() => {
             if (msg == resultado_msg_OK) {
-                puntaje++;
+                puntaje_acumulado++;
                 if (cont_trofeos < 9) {
                     cont_trofeos++;
                 } else {
@@ -135,7 +142,7 @@ let trofeos_ganados=[]
 
         $("#b_salirResultado3").click(() => {
             if (msg == resultado_msg_OK) {
-                puntaje++;
+                puntaje_acumulado++;
                 if (cont_trofeos < 9) {
                     cont_trofeos++;
                 } else {
