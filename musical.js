@@ -1,11 +1,12 @@
 $(function () {
 
-   
+    
 
-    let nombre_usuario ="";
+
+    let nombre_usuario =localStorage.getItem('mi_nombre');
     let actual_instrumentos_name = []
     
-  puntaje_acumulado=localStorage.getItem('mis_puntos')
+    let puntaje_acumulado=parseInt(localStorage.getItem('mis_puntos'));
     let cont_trofeos = 0;
     let sound = document.createElement("AUDIO");
     let trofeos_ganados=[]
@@ -15,12 +16,18 @@ $(function () {
         $("#pantallas").append(cont_pantalla_ini);
         $(".cont_pantallas").addClass("w3-animate-opacity");
         $("footer").append(credito)
+
+        $("#usuName").val(localStorage.getItem('mi_nombre')).after(puntaje_acumulado, ' puntos')
+        
+        if($("#usuName").val()!=''){
+            $("#entrar").attr("disabled", false)
+            
+        }
+
         $("#usuName").keydown(() => {
             $("#entrar").attr("disabled", false)
         })
-        
-            $("#usuName").val(localStorage.getItem('mi_nombre')).after(puntaje_acumulado, ' puntos')
-        
+
         $("#pantallas #entrar").on("click", () => {
             nombre=$("#usuName").val();
             localStorage.setItem('mi_nombre',nombre)
@@ -117,7 +124,10 @@ $(function () {
 
         $("#b_salirResultado2").click(() => {
             if (msg == resultado_msg_OK) {
-                puntaje_acumulado++;
+                puntos=parseInt(localStorage.getItem('mis_puntos'))+1;
+                console.log(puntos)
+                
+                localStorage.setItem('mis_puntos',puntos);
                 if (cont_trofeos < 9) {
                     cont_trofeos++;
                 } else {
@@ -142,7 +152,10 @@ $(function () {
 
         $("#b_salirResultado3").click(() => {
             if (msg == resultado_msg_OK) {
-                puntaje_acumulado++;
+                puntos=parseInt(localStorage.getItem('mis_puntos'))+1;
+                console.log(puntos)
+                
+                localStorage.setItem('mis_puntos',puntos);
                 if (cont_trofeos < 9) {
                     cont_trofeos++;
                 } else {
