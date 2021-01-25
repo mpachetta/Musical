@@ -2,7 +2,9 @@ cont_pantalla_ini = `<div class="cont_pantallas"><img src="logo_headphones.png" 
 <h1>MUSICAL</h1>
 <label for="usuName" class="mensaje">Introduce tu nombre</label>
 <input type="text" id="usuName" class="usuName">
-<button id="entrar" disabled=true>ENTRAR</button></div>`
+<button id="entrar" disabled=true>ENTRAR</button>
+<input type="button" id="borrar_registros" value="Borrar registros"></input>
+</div>`
 
 cont_pantalla_great = `<div class="cont_pantallas"><img src="logo_headphones.png" alt="" id="logo" width="150px">
     <h1>MUSICAL</h1>

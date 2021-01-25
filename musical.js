@@ -6,7 +6,7 @@ $(function () {
     let nombre_usuario =localStorage.getItem('mi_nombre');
     let actual_instrumentos_name = []
     
-    let puntaje_acumulado=parseInt(localStorage.getItem('mis_puntos'));
+    let puntaje_acumulado=localStorage.getItem('mis_puntos');
     let cont_trofeos = 0;
     let sound = document.createElement("AUDIO");
     let trofeos_ganados=[]
@@ -16,8 +16,20 @@ $(function () {
         $("#pantallas").append(cont_pantalla_ini);
         $(".cont_pantallas").addClass("w3-animate-opacity");
         $("footer").append(credito)
+        if (nombre_usuario=='undefined'){
+            $("#usuName").val('');
+            
+        }else{
+            $("#usuName").val(localStorage.getItem('mi_nombre'));
 
-        $("#usuName").val(localStorage.getItem('mi_nombre')).after(puntaje_acumulado, ' puntos')
+        }
+       if(puntaje_acumulado==null){
+           
+        $("#usuName").after(0, ' puntos')
+       }else{
+        $("#usuName").after(puntaje_acumulado, ' puntos')
+       }
+        
         
         if($("#usuName").val()!=''){
             $("#entrar").attr("disabled", false)
@@ -27,6 +39,19 @@ $(function () {
         $("#usuName").keydown(() => {
             $("#entrar").attr("disabled", false)
         })
+
+        $("#borrar_registros").click(()=>{
+
+            if(confirm("¿Quieres borrar el Usuario y el Puntaje?")){
+                localStorage.removeItem('mi_nombre');
+                localStorage.removeItem('mis_puntos');
+                $("#pantallas").empty();
+                $("footer").empty();
+                pantalla_ini();
+            }
+
+        })
+
 
         $("#pantallas #entrar").on("click", () => {
             nombre=$("#usuName").val();
@@ -94,8 +119,8 @@ $(function () {
         $("#b_salirResultado").click(() => {
             if (msg == resultado_msg_OK) {
                 
-                puntos=parseInt(localStorage.getItem('mis_puntos'))+1;
-                console.log(puntos)
+                puntos=parseInt(puntaje_acumulado)+1;
+                
                 
                 localStorage.setItem('mis_puntos',puntos);
                 
